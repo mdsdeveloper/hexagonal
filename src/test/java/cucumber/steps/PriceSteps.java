@@ -3,13 +3,16 @@ package cucumber.steps;
 import static io.restassured.RestAssured.get;
 
 import com.example.hexagonal.domain.models.Price;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import io.restassured.internal.RestAssuredResponseImpl;
 import io.restassured.response.Response;
 import io.restassured.response.ResponseBody;
 import java.time.LocalDateTime;
 import org.junit.jupiter.api.Assertions;
+import org.springframework.http.HttpStatus;
 
 public class PriceSteps {
 
@@ -37,14 +40,18 @@ public class PriceSteps {
         responseBody = response.getBody();
     }
 
-    @Then("the server should be response with {int}")
-    public void the_server_should_be_response_with(int expectedStatusCode) {
-        Assertions.assertEquals(expectedStatusCode, responseStatusCode);
+    @Then("the server should be response with {string}")
+    public void the_server_should_be_response_with(String expectedStatusCode) {
+        Assertions.assertEquals(Integer.parseInt(expectedStatusCode), responseStatusCode);
     }
 
-    @Then("return the next message {string}")
+    @And("return the next message {string}")
     public void return_the_next_message(String expectedMessage) {
-        Price price = responseBody.as(Price.class);
-        Assertions.assertEquals(Double.parseDouble(expectedMessage), price.price());
+        if (responseStatusCode != HttpStatus.OK.value()) {
+            Assertions.assertTrue(((RestAssuredResponseImpl) responseBody).getGroovyResponse().asString().contains(expectedMessage));
+        } else {
+            Price price = responseBody.as(Price.class);
+            Assertions.assertEquals(Double.parseDouble(expectedMessage), price.price());
+        }
     }
 }

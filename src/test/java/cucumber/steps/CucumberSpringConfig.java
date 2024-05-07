@@ -25,7 +25,7 @@ public class CucumberSpringConfig {
     @Before
     public void setup() {
         try {
-            String initSql = new String(Files.readAllBytes(Paths.get("src/test/resources/db/init-database.sql")));
+            String initSql = new String(Files.readAllBytes(Paths.get("src/test/resources/db/schema.sql")));
             String dataSql = new String(Files.readAllBytes(Paths.get("src/test/resources/db/data.sql")));
             jdbcTemplate.execute(initSql);
             jdbcTemplate.execute(dataSql);
