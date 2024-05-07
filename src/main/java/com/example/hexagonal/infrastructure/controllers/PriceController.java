@@ -7,6 +7,7 @@ import io.swagger.v3.oas.annotations.Parameter;
 import java.time.LocalDateTime;
 import javax.validation.constraints.NotNull;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -24,7 +25,7 @@ public class PriceController {
     }
 
     @Operation(summary = "Get price details", description = "Get price details based on the given parameters")
-    @GetMapping("/getPrice")
+    @GetMapping(value = "/getPrice", produces = MediaType.APPLICATION_JSON_VALUE)
     public Price getPrice(
         @Parameter(description = "Application date", required = true, example = "2022-05-01T12:00:00") @RequestParam("applicationDate")
         @NotNull(message = "Application date cannot be null") LocalDateTime applicationDate,
