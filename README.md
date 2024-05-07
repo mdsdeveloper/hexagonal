@@ -43,18 +43,8 @@ Para usar la aplicación, sigue estos pasos:
 1. Abre un navegador web.
 2. Ve a la URL [http://localhost:8080/swagger-ui.html](http://localhost:8080/swagger-ui.html) para
    acceder a la interfaz de Swagger.
-3. Para acceder a la base de datos, utiliza [H2 Console](http://localhost:8080/h2-console) e inserta
-   los datos de prueba. Por ejemplo:
-
-```sql
-INSERT INTO PRICES (BRAND_ID, START_DATE, END_DATE, PRICE_LIST, PRODUCT_ID, PRIORITY, PRICE, CURRENCY) VALUES
-(1, '2020-06-14 00:00:00', '2020-12-31 23:59:59', 1, 35455, 0, 35.50, 'EUR'),
-(1, '2020-06-14 15:00:00', '2020-06-14 18:30:00', 2, 35455, 1, 25.45, 'EUR'),
-(1, '2020-06-15 00:00:00', '2020-06-15 11:00:00', 3, 35455, 1, 30.50, 'EUR'),
-(1, '2020-06-15 16:00:00', '2020-12-31 23:59:59', 4, 35455, 1, 38.95, 'EUR');
-```
-
-Esto te permitirá insertar los datos de prueba en la tabla "PRICES".
+3. Para acceder a la base de datos, utiliza [H2 Console](http://localhost:8080/h2-console).
+   Esto te permitirá ver los datos de prueba en la tabla "PRICES".
 
 4. Explora los endpoints disponibles y sus operaciones. Un ejemplo podrías añadir estos datos en la interfaz de swagger para probar
    `(applicationDate=2020-06-14T15:00:00, productId=35455, brandId=1)`
